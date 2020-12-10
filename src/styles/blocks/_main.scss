@@ -1,10 +1,11 @@
 .main{
-    background-color: $mainColor;
+    background: linear-gradient(180deg, $mainColor 0%, rgba(0, 133, 255, 0.93) 100%);
     width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    
     .input{
         width: 500px;
         height: 64px;

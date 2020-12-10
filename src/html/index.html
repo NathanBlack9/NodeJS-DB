@@ -8,13 +8,22 @@
     <script src="js/script.js"></script>
 </head>
 <body>
+    
+    <form class="select__form" action="app.js" method="POST">
+        <select name = "select" class="select">
+            <option disabled selected>Выберите таблицу</option>
+            <option value="for_example_nodejs">for_example_nodejs</option>
+        </select>
+    </form>
     <section class="main">
-        <div class="input__area">
-            <input class="input" name="input" type="text" required placeholder="Поиск">
-            <button class="searchBtn" type="submit">
-                <img src="img/search.svg" alt="search" title="Найти">
-            </button>
-        </div>
+        <form action="app.js" method="POST">
+            <div class="input__area">
+                <input class="input" name="input" type="text" required placeholder="Поиск">
+                <button class="searchBtn" type="submit">
+                    <img src="img/search.svg" alt="search" title="Найти">
+                </button>
+            </div>
+        </form>
     </section>
 </body>
 </html>

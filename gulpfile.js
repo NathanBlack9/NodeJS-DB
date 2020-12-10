@@ -5,7 +5,8 @@ const gulp        = require('gulp'),
       rename      = require("gulp-rename"),
       autoprefixer= require('gulp-autoprefixer'),
       cleanCSS    = require('gulp-clean-css'),
-      imagemin = require('gulp-imagemin');
+      imagemin    = require('gulp-imagemin'),
+      minify      = require('gulp-minify');
 
 gulp.task('server', function() {
     browserSync.init({
@@ -14,6 +15,12 @@ gulp.task('server', function() {
         }
     });
 });      
+
+gulp.task('compressJs', function() {
+    gulp.src(['src/lib/*.js', 'src/lib/*.mjs','src/js/*.js'])
+      .pipe(minify())
+      .pipe(gulp.dest('build/js'));
+});
 
 gulp.task('minify-html', () => {
   return gulp.src('src/html/*.html')
@@ -48,6 +55,7 @@ gulp.task('styles', function() {
 gulp.task('watch', function() {
     gulp.watch("src/styles/**/*.+(scss|sass)", gulp.parallel('styles'), browserSync.reload);
     gulp.watch("src/html/*.html", gulp.parallel('minify-html'),browserSync.reload);
+    gulp.watch("src/js/*.js", gulp.parallel('compressJs'),browserSync.reload);
 });
 
 gulp.task('default', gulp.parallel('watch', 'server', 'styles', 'compressImg'));
