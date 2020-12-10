@@ -1,0 +1,6 @@
+@mixin TransitionMix($delay) {
+    -webkit-transition: all $delay linear; /* Safari and Chrome */
+       -moz-transition: all $delay linear; /* Firefox 4 */
+         -o-transition: all $delay linear; /* Opera */
+            transition: all $delay linear;
+}

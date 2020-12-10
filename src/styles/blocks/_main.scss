@@ -1,0 +1,39 @@
+.main{
+    background-color: $mainColor;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .input{
+        width: 500px;
+        height: 64px;
+
+        border-radius: 58px;
+        padding:0 47px;
+
+        background-color:white;
+        border: none;
+        outline: none;
+
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+
+        color: $textColor;
+        
+        &__area{
+            position: relative;
+        }
+    }
+    .searchBtn{
+        position: absolute;
+        top: 12px;
+        right: 22px;
+        
+        background:white;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+}
