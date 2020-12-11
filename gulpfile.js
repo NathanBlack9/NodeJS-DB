@@ -18,8 +18,13 @@ gulp.task('server', function() {
 
 gulp.task('compressJs', function() {
     gulp.src(['src/lib/*.js', 'src/lib/*.mjs','src/js/*.js'])
-      .pipe(minify())
-      .pipe(gulp.dest('build/js'));
+      .pipe(minify({
+        ext:{
+            min:''
+        }
+      }))
+      .pipe(gulp.dest('build/js'))
+      .pipe(browserSync.stream());//обновление стр
 });
 
 gulp.task('minify-html', () => {
@@ -57,5 +62,5 @@ gulp.task('watch', function() {
     gulp.watch("src/html/*.html", gulp.parallel('minify-html'),browserSync.reload);
     gulp.watch("src/js/*.js", gulp.parallel('compressJs'),browserSync.reload);
 });
-
-gulp.task('default', gulp.parallel('watch', 'server', 'styles', 'compressImg'));
+ 
+gulp.task('default', gulp.parallel('watch', 'styles', 'server', 'compressImg'));

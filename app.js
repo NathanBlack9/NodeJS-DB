@@ -1,4 +1,4 @@
-const port = process.env.port || 3000;
+const port = process.env.port || 8080;
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
@@ -19,32 +19,28 @@ const conn = mysql.createConnection({
         }else{
             console.log("Connected!");
         }
-        /*
-        var query = "INSERT INTO for_example_nodejs (id, name) VALUES (66, 'molodec')";
-        conn.query(query,(err, result)=>{
+
+        //вывод for_example_nodejs
+        let querySelect = "select * from for_example_nodejs;";
+        conn.query(querySelect,(err, result)=>{
             if (err) console.log(err);
-            //console.log(result);
-            console.log("1 record inserted");
-        });
-        */
-        let query = "select * from for_example_nodejs;";
-        conn.query(query,(err, result)=>{
-            if (err) console.log(err);
-            
+            console.log('ok1');
             app.get('/DBresult', (req,res)=>{
                 res.writeHead(200, {"Content-Type": "text/json"});
                 res.end(JSON.stringify(result)); // Передает данные result на клиента
             });
-
-            /*for (let i = 0; i < result.length; i++) {
-                if (result[i].name === 'asd') {
-                   
-                    //console.log(result[i]);
-                }
-                //console.log(result[index].name);
-            }*/
-
         });
+        //вывод всех таблиц
+        let allTables = "show tables from first;";
+        conn.query(allTables,(err, result)=>{
+            if (err) console.log(err);
+            console.log('ok2');
+            app.get('/DBtables', (req,res)=>{
+                res.writeHead(200, {"Content-Type": "text/json"});
+                res.end(JSON.stringify(result)); // Передает данные result на клиента
+            });
+        });
+
         conn.end(err=>{
             if(err){
                 console.log(err);
@@ -55,4 +51,4 @@ const conn = mysql.createConnection({
     });
 });
 // отправляем сообщение
-console.log('Server running on port 3000');
+console.log(`Server running on port ${port}`);
