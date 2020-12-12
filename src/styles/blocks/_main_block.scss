@@ -1,10 +1,12 @@
 .main{
-    background: linear-gradient(180deg, $mainColor 0%, rgba(0, 133, 255, 0.93) 100%);
+    background: linear-gradient(180deg, $mainColor 0%, rgba(2, 84, 160, 0.93) 100%);;
     width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
+    //@include TransitionMix(0.1s);
     
     .input{
         width: 500px;
@@ -12,7 +14,7 @@
 
         border-radius: 58px;
         padding:0 47px;
-
+        
         background-color:white;
         border: none;
         outline: none;
