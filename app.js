@@ -34,11 +34,16 @@ const conn = mysql.createConnection({
             conn.query(querySelect,(err, result)=>{
                 if (err) console.log(err);
                 console.log('ok1');
-                //app.get('/DBresult', (req,res)=>{
-                    res.writeHead(200, {"Content-Type": "text/json"});
-                    res.end(JSON.stringify(result)); // Передает данные result на клиента
-                //});
+                res.writeHead(200, {"Content-Type": "text/json"});
+                res.end(JSON.stringify(result)); // Передает данные result на клиента
             });
+            /*conn.end(err=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log("database--close");
+                }
+            });*/
         });
         
         //вывод всех таблиц
@@ -51,15 +56,6 @@ const conn = mysql.createConnection({
                 res.end(JSON.stringify(result)); // Передает данные result на клиента
             });
         });
-
-
-        /*conn.end(err=>{
-            if(err){
-                console.log(err);
-            }else{
-                console.log("database--close");
-            }
-        });*/
     });
 });
 // отправляем сообщение
