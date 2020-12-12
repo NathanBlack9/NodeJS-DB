@@ -24,19 +24,37 @@ const conn = mysql.createConnection({
         app.use(express.json());
 
         app.post('/slt', (req,res)=>{
-            //res.writeHead(200, {"Content-Type": "text/json"});
             var tableFromClient = Object.keys(req.body)[0];
             console.log(tableFromClient);
-            //res.end(JSON.stringify('normal')); // Передает сообщение на клиента
+            app.post('/inp', (req,res)=>{
+                var d = Object.keys(req.body)[0];
+                console.log(d);
+                console.log(tableFromClient);
+                if (tableFromClient === 'for_example_nodejs') 
+                querySelect = `select * from ${tableFromClient} where name = '${d}' || id = '${d}';`;
+                else if (tableFromClient ==='students')                 
+                querySelect = `select * from ${tableFromClient} where Фамилия = '${d}' || Имя = '${d}' || Номер_зачетки = '${d}' || Отчество = '${d}' || Институт = '${d}' || Курс = '${d}'`;
+                
+                conn.query(querySelect,(err, result)=>{
+                    if (err) console.log(err);
+                    console.log('ok3');
+                    res.writeHead(200, {"Content-Type": "text/json"});
+                    res.end(JSON.stringify(result)); // Передает данные result на клиента
+                });
+            });
 
-            //вывод for_example_nodejs / students
-            let querySelect = `select * from ${tableFromClient};`;
+            let querySelect = `select * from ${tableFromClient} ;`;
+                
             conn.query(querySelect,(err, result)=>{
                 if (err) console.log(err);
                 console.log('ok1');
                 res.writeHead(200, {"Content-Type": "text/json"});
                 res.end(JSON.stringify(result)); // Передает данные result на клиента
             });
+            
+            //res.end(JSON.stringify('normal')); // Передает сообщение на клиента
+            //вывод for_example_nodejs / students
+            
             /*conn.end(err=>{
                 if(err){
                     console.log(err);
@@ -45,6 +63,7 @@ const conn = mysql.createConnection({
                 }
             });*/
         });
+        
         
         //вывод всех таблиц
         let allTables = "show tables from first;";
